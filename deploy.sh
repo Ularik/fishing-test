@@ -34,10 +34,10 @@ echo "(docker-compose) Нажмите 'y' для перезапуска docker c
 read input
 if [[ "$input" == "y" ]]; then
   echo "Рестарт docker compose"
-  docker-compose restart
+  docker compose restart
 elif [[ "$input" == "b" ]]; then
   echo "Ребилд docker compose"
-  docker-compose up --build
+  docker compose up --build
 else
   echo "Вы отменили перезапуск docker compose."
 fi
