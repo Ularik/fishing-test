@@ -79,9 +79,9 @@ cd {путь_к_папке_проекта}/
 Важно! Не забудьте предварительно создать папку окружения и установить зависимости!
 Из папки проекта выполнить:
 >python -m venv venv
-> 
+>
 >source venv/bin/activate
-> 
+>
 >pip install -r requirements.txt
 
 Запуск скрипта
@@ -153,7 +153,7 @@ https://gitlab.com/-/user_settings/personal_access_tokens
 
 Достать номер из истории
 >history
-> 
+>
 Если нужно удалить из истории.
 >history -d 1234
 
@@ -247,7 +247,7 @@ location /static {
 location /media {
 	alias $root_path/media;
 	}
-	
+
 location / {
 	proxy_pass http://127.0.0.1:{порт app из env};
 	proxy_http_version 1.1;
