@@ -44,6 +44,8 @@ services:
     restart: always
     ports:
       - "6379"
+    # Ограничение памяти + автоочистка + отключение персистентности
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru --save "" --appendonly no
 
   beats:
     restart: always

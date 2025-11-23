@@ -125,6 +125,13 @@ ASGI_APPLICATION = 'project.asgi.application'
 CELERY_BROKER_URL = "redis://redis:6379"
 CELERY_RESULT_BACKEND = "redis://redis:6379"
 CELERY_TASK_TIME_LIMIT = 3600
+# Оптимизация Celery для снижения нагрузки
+CELERY_RESULT_EXPIRES = 3600  # Результаты хранятся 1 час
+CELERY_TASK_IGNORE_RESULT = False  # Можно поставить True для задач без результата
+CELERY_TASK_SOFT_TIME_LIMIT = 300  # Мягкий лимит 5 минут
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1  # Воркер берет по 1 задаче (снижает нагрузку)
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True  # Переподключение при старте
+
 
 ROOT_URLCONF = 'project.urls'
 
