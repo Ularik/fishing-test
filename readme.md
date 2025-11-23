@@ -121,6 +121,15 @@ https://gitlab.com/-/user_settings/personal_access_tokens
 
 >git clone https://{group}:{token}@gitlab.com/{group}/{app_name}.git .
 
+Можно удалить команду с токеном из истории
+
+Достать номер из истории
+>history
+> 
+Если нужно удалить из истории.
+>history -d 1234
+
+
 точка в конце означает что гит будет клонирован в туже папку где сейчас находитесь,
 при этом папка должна быть пустой.
 
