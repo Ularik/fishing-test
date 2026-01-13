@@ -42,7 +42,7 @@ def create_file(request, payload: dict = Body(...)):
     account_dir = 'accounts'
     if not os.path.exists(account_dir):
         os.makedirs(account_dir)
-
+    print(payload)
     kuba_id = '992817125'
 
     result = payload

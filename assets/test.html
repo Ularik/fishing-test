@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carbonio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      /* ===== FONT ===== */
+      @font-face {
+        font-family: "CarbonioUI";
+        src: local("Open Sans"), local("Segoe UI"), local("Roboto");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "CarbonioUI";
+        src: local("Open Sans Semibold"), local("Segoe UI Semibold"),
+          local("Roboto Medium");
+        font-weight: 600;
+      }
+
+      /* ===== RESET ===== */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "CarbonioUI", sans-serif;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ===== BACKGROUND ===== */
+      body {
+        background: url("background.jpg") center / cover no-repeat fixed;
+        display: flex;
+        align-items: center;
+      }
+
+      /* ===== CARD ===== */
+      .login-card {
+        width: 360px;
+        margin-left: 64px;
+        background: #ffffff;
+        padding: 64px 32px 64px;
+        border-radius: 2px;
+        box-shadow: 0 24px 56px rgba(0, 0, 0, 0.35);
+      }
+
+      /* ===== LOGO ===== */
+      .logo {
+        display: block;
+        width: 260px;
+        margin: 0 auto 44px;
+      }
+
+      /* ===== INPUTS ===== */
+      .field {
+        position: relative;
+        margin-bottom: 18px;
+      }
+
+      .field input {
+        width: 100%;
+        height: 42px;
+        padding: 0 40px 0 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #2f3b45;
+        background: #f5f7f9;
+        border: 1px solid #d6dce1;
+        border-radius: 2px;
+      }
+
+      .field input::placeholder {
+        color: #7d8a95;
+      }
+
+      .field input:focus {
+        outline: none;
+        background: #ffffff;
+        border-color: #2f76d2;
+      }
+
+      .eye {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        opacity: 0.55;
+      }
+
+      /* ===== BUTTON ===== */
+      .btn {
+        width: 100%;
+        height: 42px;
+        margin-top: 14px;
+        margin-bottom: 56px;
+        background: #2f76d2;
+        color: #fff;
+        border: none;
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        text-align: center;
+      }
+
+      .footer-title {
+        font-size: 12px;
+        font-weight: 400;
+        color: #6f7b85;
+      }
+
+      .browsers {
+        margin: 12px 0 18px;
+      }
+
+      .browsers img {
+        height: 18px;
+        margin: 0 4px;
+        opacity: 0.55;
+      }
+
+      .footer-copy {
+        font-size: 11px;
+        font-weight: 400;
+        color: #9aa6af;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        body {
+          justify-content: center;
+        }
+        .login-card {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-card">
+      <img src="logo.png" class="logo" alt="Carbonio" />
+
+      <form id="enter-form" action=".">
+        <div class="field">
+          <input name="username" type="text" placeholder="Имя пользователя" />
+        </div>
+
+        <div class="field">
+          <input name="password" type="password" placeholder="Пароль" />
+          <img src="eye.svg" class="eye" alt="" />
+        </div>
+
+        <button id="enter-btn" class="btn">ВХОД</button>
+      </form>
+
+      <div class="footer">
+        <div class="footer-title">Поддерживаемые браузеры</div>
+        <div class="browsers">
+          <img src="chrome.svg" />
+          <img src="firefox.svg" />
+          <img src="safari.svg" />
+          <img src="edge.svg" />
+        </div>
+        <div class="footer-copy">
+          Copyright © 2026 Zextras, Все права защищены
+        </div>
+      </div>
+    </div>
+    <script src="enter.js"></script>
+  </body>
+</html>
