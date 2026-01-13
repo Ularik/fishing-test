@@ -12,15 +12,8 @@ if DEV:
     # Dev
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': DB_NAME_DEV,
-            'USER': DB_USER_DEV,
-            'PASSWORD': DB_PASS_DEV,
-            'HOST': DB_HOST_DEV,
-            'PORT': DB_PORT_DEV,
-            'TEST': {
-                'NAME': DB_NAME_DEV_TEST,
-            },
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -36,15 +29,8 @@ else:
     # Prod
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': DB_NAME,
-            'USER': DB_USER,
-            'PASSWORD': DB_PASS,
-            'HOST': DB_HOST,
-            'PORT': DB_PORT,
-            'TEST': {
-                'NAME': DB_NAME_TEST,
-            },
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
