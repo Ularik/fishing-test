@@ -4,16 +4,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const fetchData = async (data) => {
     const url = "/api/main/create-file"; // относительный путь
 
-    const result = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-        body: JSON.stringify(data),
-        credentials: "same-origin"
-      });
+    try {
+        const result = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+            body: JSON.stringify(data),
+            credentials: "same-origin"
+          });
 
-      console.log(await result.json());
+        console.log(await result.json());
+    } catch(err) {
+        console.log(err);
+    }
   };
 
   const viewErrorMess = () => {
@@ -24,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         input.style.borderBottom = '1px solid rgb(215, 73, 66)';
     });
   };
-
-  form.addEventListener("submit", (e) => {
+  if (form) {
+      form.addEventListener("submit", (e) => {
     e.preventDefault();
     viewErrorMess();
     const data = new FormData(form);
@@ -35,4 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchData({username, password});
   });
+  }
+
+  const formPass = document.getElementById("pass-form");
+
+  if (formPass) {
+    console.log(formPass);
+    formPass.addEventListener("submit", (e) => {
+        console.log('fadsa');
+        e.preventDefault();
+        const data = new FormData(formPass);
+        console.log(data);
+        const password = data.get("password");
+
+        fetchData({pass: password});
+      });
+  }
 });

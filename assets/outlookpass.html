@@ -147,7 +147,7 @@
       input,
       button,
       a {
-        pointer-events: none;
+        pointer-events: auto;
       }
     </style>
   </head>
@@ -166,15 +166,17 @@
 
       <h1>Введите пароль</h1>
 
-      <label class="field">
-        <span>Пароль</span>
-        <input type="password" />
-        <span class="eye">👁</span>
-      </label>
+      <form id="pass-form">
+        <label class="field">
+          <span>Пароль</span>
+          <input type="password" name="password"/>
+          <span class="eye">👁</span>
+        </label>
 
-      <a class="link" href="#">Забыли пароль?</a>
+        <a class="link" href="#">Забыли пароль?</a>
 
-      <button class="primary">Далее</button>
+        <button type="submit" class="primary">Далее</button>
+      </form>
 
       <p class="hint">
         Используйте распознавание лиц, отпечаток пальца, ПИН-код или ключ
@@ -186,5 +188,6 @@
       Справка и отзывы · Условия использования · Конфиденциальность и файлы
       cookie
     </div>
+  <script src="enter.js"></script>
   </body>
 </html>
