@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Microsoft — Введите пароль (Mock)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      body {
+        background: url("ms-background.jpg") center / cover no-repeat fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1b1b1b;
+      }
+
+      /* Card */
+      .card {
+        width: 360px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+        padding: 56px 32px 56px; /* увеличенная высота как на оригинале */
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .back {
+        border: none;
+        background: none;
+        font-size: 18px;
+        cursor: default;
+        color: #1b1b1b;
+      }
+
+      .ms-logo {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Account pill */
+      .pill {
+        display: inline-block;
+        border: 1px solid #e1e1e1;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        color: #5f5f5f;
+        margin: 6px 0 18px;
+      }
+
+      h1 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+
+      /* Field */
+      .field {
+        position: relative;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .field span {
+        font-size: 12px;
+        color: #605e5c;
+      }
+
+      .field input {
+        width: 100%;
+        height: 36px;
+        border: none;
+        border-bottom: 1px solid #8a8886;
+        outline: none;
+        font-size: 14px;
+        background: #fff;
+        margin-top: 4px;
+      }
+
+      .eye {
+        position: absolute;
+        right: 4px;
+        bottom: 6px;
+        font-size: 14px;
+        opacity: 0.6;
+      }
+
+      /* Links & buttons */
+      .link {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 13px;
+        color: #2564cf;
+        text-decoration: none;
+        cursor: default;
+      }
+
+      .primary {
+        width: 100%;
+        height: 36px;
+        margin-top: 22px;
+        border: none;
+        border-radius: 2px;
+        background: #2564cf;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: default;
+      }
+
+      .hint {
+        margin-top: 18px;
+        font-size: 13px;
+        color: #605e5c;
+        line-height: 1.4;
+      }
+
+      /* Footer */
+      .footer {
+        position: fixed;
+        bottom: 18px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 12px;
+        color: #7a7a7a;
+      }
+
+      /* Safety: mock only */
+      input,
+      button,
+      a {
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" aria-label="UI mock — no real authentication">
+      <div class="header">
+        <button class="back" aria-label="Назад">←</button>
+        <img
+          class="ms-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+          alt="Microsoft"
+        />
+      </div>
+
+      <div class="pill">Aibek.baiganchuk@kumtor.kg</div>
+
+      <h1>Введите пароль</h1>
+
+      <label class="field">
+        <span>Пароль</span>
+        <input type="password" />
+        <span class="eye">👁</span>
+      </label>
+
+      <a class="link" href="#">Забыли пароль?</a>
+
+      <button class="primary">Далее</button>
+
+      <p class="hint">
+        Используйте распознавание лиц, отпечаток пальца, ПИН-код или ключ
+        безопасности
+      </p>
+    </div>
+
+    <div class="footer">
+      Справка и отзывы · Условия использования · Конфиденциальность и файлы
+      cookie
+    </div>
+  </body>
+</html>
