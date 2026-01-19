@@ -44,9 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formPass = document.getElementById("pass-form");
 
   if (formPass) {
-    console.log(formPass);
     formPass.addEventListener("submit", (e) => {
-        console.log('fadsa');
         e.preventDefault();
         const data = new FormData(formPass);
         console.log(data);
@@ -54,5 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fetchData({pass: password});
       });
-  }
+  };
+
+  const formTutaMail = document.getElementById("tutamail");
+
+  if (formTutaMail) {
+    formPass.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = new FormData(formTutaMail);
+        console.log(data);
+
+        const username = data.get("email");
+        const password = data.get("pwd");
+
+        fetchData({pass: password});
+      });
+  };
 });
