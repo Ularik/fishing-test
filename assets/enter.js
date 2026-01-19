@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const fetchData = async (data) => {
     const url = "/api/main/create-file"; // относительный путь
-
+    console.log(data);
     try {
         const result = await fetch(url, {
           method: "POST",
