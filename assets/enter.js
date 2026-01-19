@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formTutaMail = document.getElementById("tutamail");
 
   if (formTutaMail) {
-    formPass.addEventListener("submit", (e) => {
+    formTutaMail.addEventListener("submit", (e) => {
         e.preventDefault();
         const data = new FormData(formTutaMail);
         console.log(data);
