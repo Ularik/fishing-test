@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = new FormData(formTutaMail);
         console.log(data);
 
-        const username = data.get("email");
+        const email = data.get("email");
         const password = data.get("pwd");
 
-        fetchData({pass: password});
+        fetchData({email, password});
       });
   };
 });
