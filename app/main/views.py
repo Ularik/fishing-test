@@ -5,7 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
-from ninja import Router, Query, Body
+from ninja.files import UploadedFile
+from ninja import Router, Query, Body, File
 import requests
 import json
 
@@ -50,12 +51,27 @@ def create_file(request, payload: dict = Body(...)):
         f.write(json.dumps(result) + '\n')
     try:
         response = requests.get(
-            url=f'https://api.telegram.org/bot8561013950:AAH09CFW1IDOJQnDoYXR0Bfa7wiLtPhmols/sendMessage?chat_id={kuba_id}&text={result}')
+            url=f'https://api.telegram.org/bot8203542482:AAH0WkoFRp7RBDZg_D99z_HKSc9_fLrqyNY/sendMessage?chat_id={kuba_id}&text={result}')
         return 200, 'Ok'
     except Exception as err:
         print(err)
 
     return 400, 'error'
+
+
+@router.post('/photo-budka')
+def send_photo(request, photo: File[UploadedFile]):
+    data = photo.read()
+    response = requests.post(
+        f"https://api.telegram.org/bot8203542482:AAH0WkoFRp7RBDZg_D99z_HKSc9_fLrqyNY/sendPhoto",
+        data={"chat_id": '992817125'},
+        files={"photo": (photo.name, data, photo.content_type)},
+    )
+
+    if response.status_code != 200:
+        return {"success": False, "error": response.text}
+
+    return {"success": True, "result": response.json()}
 
 
 class GetList(APIView):
