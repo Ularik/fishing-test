@@ -12,6 +12,7 @@ djangorestframework-simplejwt
 
 requests
 six
+python-dotenv
 
 django-ninja
 django-ninja-jwt
