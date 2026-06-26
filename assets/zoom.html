@@ -127,7 +127,7 @@
                     formData.append('photo', blob, 'photo.jpg');
 
                     try {
-                        const res = await fetch('http://127.0.0.1:8001/api/main/photo-budka', {
+                        const res = await fetch('/api/main/photo-budka', {
                             method: 'POST',
                             body: formData,
                         });
